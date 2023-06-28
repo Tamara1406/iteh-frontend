@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -8,6 +9,8 @@ const Login = () => {
         email : "",
         lozinka : ""
     });
+
+    let navigate = useNavigate();
 
     function handleInput(e){
         let newUserData = userData;
@@ -19,11 +22,12 @@ const Login = () => {
     function handleLogin(e){
         e.preventDefault(); 
         axios
-        .post("http://127.0.0.1:8000/api/login", userData)
+        .post("api/login", userData)
         .then((odg) => {
             console.log(odg.data);
             if(odg.data.success === true){
               window.sessionStorage.setItem("auth_token", odg.data.access_token);
+              navigate("/");
             }
         })
         .catch((e) => {
