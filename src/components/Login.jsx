@@ -18,14 +18,17 @@ const Login = () => {
 
     function handleLogin(e){
         e.preventDefault(); 
-        //axios
-        //.post("http://127.0.0.1:8000/api/login", userData)
-        //.then((odg) => {
-        //    console.log(odg.data);
-        //})
-        //.catch((e) => {
-        //    console.log(e);
-        //});
+        axios
+        .post("http://127.0.0.1:8000/api/login", userData)
+        .then((odg) => {
+            console.log(odg.data);
+            if(odg.data.success === true){
+              window.sessionStorage.setItem("auth_token", odg.data.access_token);
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+        });
     }
 
   return (
@@ -60,7 +63,7 @@ const Login = () => {
                   id="form3Example4"
                   className="form-control form-control-lg"
                   placeholder="Enter password"
-                  name="lozinka"
+                  name="password"
                   onInput={handleInput}
                 />
                 <label className="form-label" htmlFor="form3Example4">
