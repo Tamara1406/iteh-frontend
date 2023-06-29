@@ -50,7 +50,7 @@ const NavBar = ({ token }) => {
                 Dokumenta
         </a>
         <a className = "nav-link" 
-            href="#">
+            href="/autors">
                 Autori
         </a>
         {token == null ? 
