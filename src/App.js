@@ -18,9 +18,10 @@ function addToken( auth_token ){
   return (
     <BrowserRouter className="App">
       <Routes>
-        <Route path = "/login" element = {<Login addToken = { addToken } />} />
-        <Route path = "/register" element = {<Register/>} />
+      
         <Route path = "/" element = {<NavBar token = { token } />} >
+          <Route path = "login" element = {<Login addToken = { addToken } />} />
+          <Route path = "register" element = {<Register/>} />
           <Route path = "documents" element = {<Documents/>} />
           <Route path = "autors" element = {<Autors/>} />
         </Route>

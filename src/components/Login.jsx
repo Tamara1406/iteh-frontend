@@ -37,69 +37,43 @@ const Login = ({ addToken }) => {
     }
 
   return (
-    <section
-      className="vh-100"
-      style={{
-        paddingTop: 4.5 + "rem",
-      }}
-    >
-      <div className="container-fluid h-custom">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          
-          <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form onSubmit={handleLogin}>
-              <div className="form-outline mb-4">
-                <input
-                  type="email"
-                  id="form3Example3"
-                  className="form-control form-control-lg"
-                  placeholder="Enter a valid email address"
-                  name="email"
-                  onInput={handleInput}
-                />
-                <label className="form-label" htmlFor="form3Example3">
-                  Email adresa
-                </label>
-              </div>
 
-              <div className="form-outline mb-3">
-                <input
-                  type="password"
-                  id="form3Example4"
-                  className="form-control form-control-lg"
-                  placeholder="Enter password"
-                  name="password"
-                  onInput={handleInput}
-                />
-                <label className="form-label" htmlFor="form3Example4">
-                  Lozinka
-                </label>
-              </div>
+    <section className="vh-100" style={{backgroundColor: "#508bfc"}}>
+  <div className="container py-5 h-100">
+    <div className="row d-flex justify-content-center align-items-center h-100">
+      <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div className="card shadow-2-strong" style={{borderRadius: "1rem"}}>
+          <div className="card-body p-5 text-center">
+          <form onSubmit={handleLogin}>
+            <h3 className="mb-5">Prijava</h3>
 
-              <div className="text-center text-lg-start mt-4 pt-2">
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-lg"
-                  style={{
-                    paddingLeft: 2.5 + "rem",
-                    paddingRight: 2.5 + "rem",
-                  }}
-                >
-                  Prijavi se
-                </button>
-                <p className="small fw-bold mt-2 pt-1 mb-0">
-                  Nemaš svoj nalog?{" "}
-                  <a href="/register" className="link-danger">
-                    Registruj se
-                  </a>
-                </p>
-              </div>
+            <div className="form-outline mb-4">
+              <input type="email" id="typeEmailX-2" className="form-control form-control-lg" name="email" onInput={handleInput}/>
+              <label className="form-label" htmlFor="typeEmailX-2">Email</label>
+            </div>
+
+            <div className="form-outline mb-4">
+              <input type="password" id="typePasswordX-2" className="form-control form-control-lg" name="password" onInput={handleInput}/>
+              <label className="form-label" htmlFor="typePasswordX-2">Lozinka</label>
+            </div>
+
+            <button className="btn btn-primary btn-lg btn-block" type="submit">Prijavi se</button>
+
+            
+            <div style={{marginTop: "30px"}}>
+              <p className="mb-0">Nemaš svoj nalog? <a href="/register" className="text-50 fw-bold">Registruj se</a>
+              </p>
+            </div>
             </form>
           </div>
         </div>
       </div>
-    </section>
-  )
+    </div>
+  </div>
+</section>
+)
 }
+
+ 
 
 export default Login

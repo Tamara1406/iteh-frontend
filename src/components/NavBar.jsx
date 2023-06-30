@@ -1,27 +1,30 @@
 import React from 'react'
 import axios from 'axios';
 import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const NavBar = ({ token }) => {
 
-    function handleLogout() {
-        let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'api/logout',
-            headers: { 
-              'Authorization': 'Bearer ' + window.sessionStorage.getItem("auth_token")
-            },
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log(JSON.stringify(response.data));
-            window.sessionStorage.setItem("auth_token", null);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    function handleLogout(e) {
+       let config = {
+        method: 'post',
+        url: 'api/logout',
+        headers: { 
+          'Authorization': 'Bearer ' + window.sessionStorage.getItem("auth_token"),
+        }
+      };
+      
+      window.sessionStorage.setItem("auth_token", null);
+
+      axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
+      
     }
 
   return (
@@ -53,7 +56,7 @@ const NavBar = ({ token }) => {
             href="/autors">
                 Autori
         </a>
-        {token == null ? 
+        { token == null  ? 
         (<a className = "nav-link" href="/login">
                 Login
         </a>) : 
@@ -68,6 +71,8 @@ const NavBar = ({ token }) => {
 </nav>
 <Outlet/>
 </div>
+
+
 )
 }
 
