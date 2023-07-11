@@ -56,7 +56,7 @@ const NavBar = ({ token }) => {
             href="/autors">
                 Autori
         </a>
-        { token == null  ? 
+        { token == null ? 
         (<a className = "nav-link" href="/login">
                 Login
         </a>) : 

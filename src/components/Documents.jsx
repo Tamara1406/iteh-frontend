@@ -3,7 +3,8 @@ import axios from 'axios';
 import OneDocument from './OneDocument';
 import { useState, useEffect } from 'react';
 
-const Documents = () => {
+
+const Documents = ( {token} ) => {
     const [docs, setDocs] = useState();
     useEffect(() =>{
         if(docs == null){
@@ -19,6 +20,13 @@ const Documents = () => {
 
   return (
     <div>
+      <div style={{marginTop: "30px", marginLeft: "80px"}}>
+         
+        
+        {token == ""  ?   <></> :
+        <a href="adddocuments" className="text-50 fw-bold">Novi dokument</a>
+        }    
+       </div>
       {docs == null ? <></> : docs.map((doc) => (
         <OneDocument doc = { doc } key = { doc.id } />
       ))}
