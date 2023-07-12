@@ -28,7 +28,7 @@ const AddDocument = () => {
     function handleDocument(e){
         e.preventDefault(); 
         axios
-        .post("api/documents", docData, {headers: { 'Authorization': 'Bearer ' + window.sessionStorage.getItem('auth_token')}})
+        .post("api/documents", docData, {headers: { 'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`}})
         .then((odg) => {
             console.log(odg.data);
             navigate("/documents");

@@ -26,6 +26,7 @@ const NavBar = ({ token }) => {
       
       
     }
+    
 
   return (
 <div>

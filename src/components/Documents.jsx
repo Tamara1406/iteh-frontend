@@ -4,7 +4,7 @@ import OneDocument from './OneDocument';
 import { useState, useEffect } from 'react';
 
 
-const Documents = ( {token} ) => {
+const Documents = ( {token, onDelete} ) => {
     const [docs, setDocs] = useState();
     useEffect(() =>{
         if(docs == null){
@@ -28,7 +28,7 @@ const Documents = ( {token} ) => {
         }    
        </div>
       {docs == null ? <></> : docs.map((doc) => (
-        <OneDocument doc = { doc } key = { doc.id } />
+        <OneDocument doc = { doc } key = { doc.id } onDelete = {onDelete}/>
       ))}
     </div>
   )

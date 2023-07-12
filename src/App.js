@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes, Router } from 'react-router-dom';
 import { useState } from 'react';
 import Autors from './components/Autors';
 import AddDocument from './components/AddDocument';
+import axios from 'axios';
 
 function App() {
 const [token, setToken] = useState();
@@ -15,6 +16,34 @@ const [token, setToken] = useState();
 function addToken( auth_token ){
   setToken(auth_token);
 }
+
+function deleteDocument(id){
+  axios
+  .delete("api/documents/" + id,{headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`} } )
+  .then((res)=>{  
+      console.log(res.data);
+      const token = window.sessionStorage.getItem('auth_token');
+      window.location. reload();
+      window.sessionStorage.set('auth_token',token);
+
+  })
+  .catch(function (error) {
+    if (error.response) {
+      // Request made and server responded
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+
+  });
+}
+
 
 
   return (
@@ -25,7 +54,7 @@ function addToken( auth_token ){
         <Route path = "/" element = {<NavBar token = { token } />} >
           <Route path = "login" element = {<Login addToken = { addToken } />} />
           <Route path = "register" element = {<Register/>} />
-          <Route path = "documents" element = {<Documents/>} />
+          <Route path = "documents" element = {<Documents onDelete = {deleteDocument}/>} />
           <Route path = "autors" element = {<Autors/>} />
 
           <Route path = "adddocuments" element = {<AddDocument token = { token } />} />
