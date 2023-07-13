@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddDocument = () => {
   const [docData, setDocData] = useState({
@@ -13,6 +15,7 @@ const AddDocument = () => {
     sistemupravljanja_id: 1,
     brojStrana: 20,
   });
+  const [error, setError] = useState(null);
 
   let navigate = useNavigate();
   function handleReturn() {
@@ -27,8 +30,13 @@ const AddDocument = () => {
     console.log(docData);
   }
 
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   function handleDocument(e) {
     e.preventDefault();
+    setError(null);
     axios
       .post("api/documents", docData, {
         headers: {
@@ -38,16 +46,26 @@ const AddDocument = () => {
         },
       })
       .then((odg) => {
-        console.log(odg.data);
-        navigate("/documents");
+        console.log("odg " + odg.status);
+        if (odg.status === 200) {
+          toast.success("Dodato!"); // Display success notification
+          //navigate("/documents");
+        } else {
+          toast.error("Greška: Neispravno uneti podaci.");
+        }
+        // window.location.reload();
+        //navigate("/documents");
       })
       .catch((e) => {
         console.log(e);
+        //setError("Došlo je do greške prilikom čuvanja dokumenta.");
+        toast.error("Greška: " + e.response.data.message);
       });
   }
 
   return (
     <div>
+      <ToastContainer />
       <section
         className="vh-100"
         style={{
@@ -161,9 +179,27 @@ const AddDocument = () => {
               >
                 Return to Documents
               </button>
+              <button
+                onClick={handleReload}
+                style={{
+                  backgroundColor: "#191970",
+                  color: "white",
+                  borderRadius: "10px",
+                  fontSize: "15px",
+                  border: "2px solid black",
+                  paddingLeft: "2.5rem",
+                  paddingRight: "2.5rem",
+                  position: "fixed",
+                  bottom: "20px",
+                  right: "20px",
+                }}
+              >
+                Dodaj jos
+              </button>
             </div>
           </div>
         </div>
+        {error && <div style={{ color: "red" }}>{error}</div>}
       </section>
     </div>
   );
