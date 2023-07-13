@@ -1,0 +1,15 @@
+.card-header{
+    background-color: #4682B4;
+    color: antiquewhite;
+    font-weight: 10px;
+    
+}
+.card-footer{
+    background-color: whitesmoke;
+}
+.card-body{
+    background-color: whitesmoke;
+}
+.card-body.button{
+    background-color: #191970;
+}

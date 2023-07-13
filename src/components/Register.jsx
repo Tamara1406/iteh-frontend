@@ -1,37 +1,36 @@
-import React from 'react'
-import { useState } from 'react'
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    lozinka: "",
+  });
 
-    const[userData, setUserData] = useState({
-        name: "",
-        email : "",
-        lozinka : ""
-    });
+  let navigate = useNavigate();
 
-    let navigate = useNavigate();
+  function handleInput(e) {
+    let newUserData = userData;
+    newUserData[e.target.name] = e.target.value;
+    setUserData(newUserData);
+    console.log(userData);
+  }
 
-    function handleInput(e){
-        let newUserData = userData;
-        newUserData[e.target.name] = e.target.value;
-        setUserData(newUserData);
-        console.log(userData)
-    }
-
-    function handleRegister(e){
-        e.preventDefault(); 
-        axios
-        .post("api/register", userData)
-        .then((odg) => {
-            console.log(odg.data);
-            navigate("/login");
-        })
-        .catch((e) => {
-            console.log(e);
-        });
-    }
+  function handleRegister(e) {
+    e.preventDefault();
+    axios
+      .post("api/register", userData)
+      .then((odg) => {
+        console.log(odg.data);
+        navigate("/login");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
   return (
     <section
@@ -42,11 +41,9 @@ function Register() {
     >
       <div className="container-fluid h-custom">
         <div className="row d-flex justify-content-center align-items-center h-100">
-          
           <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form onSubmit={handleRegister}>
-
-            <div className="form-outline mb-4">
+              <div className="form-outline mb-4">
                 <input
                   type="name"
                   id="form3Example4"
@@ -105,7 +102,7 @@ function Register() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Register
+export default Register;
