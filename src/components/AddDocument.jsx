@@ -59,7 +59,7 @@ const AddDocument = () => {
       .catch((e) => {
         console.log(e);
         //setError("Došlo je do greške prilikom čuvanja dokumenta.");
-        toast.error("Greška: " + e.response.data.message);
+        toast.error("Greška neispravno uneti podaci ");
       });
   }
 
