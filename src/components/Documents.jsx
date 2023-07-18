@@ -21,6 +21,8 @@ const Documents = ({ token, onDelete }) => {
     console.log("token " + token);
   });
 
+  
+
   return (
     <div>
       <div style={{ marginTop: "30px", marginLeft: "80px" }}>
@@ -54,8 +56,8 @@ const Documents = ({ token, onDelete }) => {
         <></>
       ) : (
         docs.map((doc) => (
-          <OneDocument doc={doc} key={doc.id} onDelete={onDelete} />
-        ))
+          <OneDocument doc={doc} key={doc.id} onDelete={onDelete}/> 
+          ))
       )}
     </div>
   );

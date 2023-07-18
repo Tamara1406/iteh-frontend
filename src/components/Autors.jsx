@@ -2,8 +2,9 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import OneAutor from "./OneAutor";
+import { useNavigate } from "react-router-dom";
 
-const Autors = () => {
+const Autors = ({ token, onDelete }) => {
   const [autors, setAutors] = useState();
   useEffect(() => {
     if (autors == null) {
@@ -14,6 +15,8 @@ const Autors = () => {
     }
   });
 
+  const navigate = useNavigate({ onDelete });
+
   const sortAutors = () => {
     const sortedAutors = [...autors]; // Create a copy of the autors array
     sortedAutors.sort((a, b) => b.brojDokumenata - a.brojDokumenata); // Sort the array based on brojDokumenata in descending order
@@ -22,6 +25,22 @@ const Autors = () => {
 
   return (
     <div>
+     
+          <button
+            className="text-50 fw-bold"
+            style={{
+              backgroundColor: "#4682B4",
+              color: "white",
+              borderRadius: "10px",
+              fontSize: "15px",
+              marginLeft: "370px",
+            }}
+            onClick={() => navigate("/addautor")}
+          >
+            Novi autor
+          </button>
+        
+
       <button
         onClick={sortAutors}
         style={{
@@ -38,7 +57,7 @@ const Autors = () => {
       {autors == null ? (
         <></>
       ) : (
-        autors.map((autor) => <OneAutor autor={autor} key={autor.id} />)
+        autors.map((autor) => <OneAutor autor={autor} key={autor.id} onDelete = {onDelete} />)
       )}
     </div>
   );

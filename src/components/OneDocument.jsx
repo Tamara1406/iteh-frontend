@@ -1,8 +1,13 @@
 import React from "react";
 import axios from "axios";
-import "../css/OneDocument.css";
+import "../css/OneDocument.css"; 
+import { useNavigate } from "react-router-dom";
 
-const OneDocument = ({ doc, onDelete }) => {
+const OneDocument = ({ doc, onDelete   }) => {
+  let navigate = useNavigate();
+
+  
+
   return (
     <div
       className="card"
@@ -21,6 +26,22 @@ const OneDocument = ({ doc, onDelete }) => {
       </div>
       <div className="card-footer">
         <div className="card-footer-text">{doc.autor.ime}</div>
+        
+        <button
+          style={{
+            backgroundColor: "#4682B4",
+            color: "white",
+            borderRadius: "10px",
+            fontSize: "15px",
+            position: "absolute",
+            bottom: "10px",
+            right: "10px",
+          }}
+          className="card-text"
+          onClick={() => navigate("/updatedocuments")}
+        >
+          Promeni dokument
+        </button>
         <button
           style={{
             backgroundColor: "#4682B4",

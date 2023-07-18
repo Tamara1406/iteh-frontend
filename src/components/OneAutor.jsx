@@ -1,6 +1,6 @@
 import React from "react";
 
-const OneAutor = ({ autor }) => {
+const OneAutor = ({ autor, onDelete }) => {
   return (
     <div
       className="card"
@@ -30,7 +30,29 @@ const OneAutor = ({ autor }) => {
           Broj dokumenata: {autor.brojDokumenata}
         </li>
       </ul>
+      <div className="card-footer">
+        <div className="card-footer-text">{autor.ime}</div>
+        <button
+          style={{
+            backgroundColor: "#4682B4",
+            color: "white",
+            borderRadius: "10px",
+            fontSize: "15px",
+            position: "absolute",
+            bottom: "10px",
+            right: "10px",
+          }}
+          className="card-text"
+          onClick={() => {
+            onDelete(autor.id);
+            alert("Brisanje");
+          }}
+        >
+          Obriši autora
+        </button>
+      </div>
     </div>
+    
   );
 };
 
