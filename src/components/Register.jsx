@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
   const [userData, setUserData] = useState({
@@ -32,7 +34,23 @@ function Register() {
       .post("api/register", userData)
       .then((odg) => {
         console.log(odg.data);
-        navigate("/login");
+        //console.log("odg"+ odg.status);
+        console.log(typeof userData.email);
+       
+        if (userData.email && userData.username && userData.password) {
+          toast.success("Dodato!"); // Display success notification
+          //navigate("/documents");
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000); 
+         
+        } else {
+          toast.error("Greška: Neispravno uneti podaci.");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000); 
+        }
+        
       })
       .catch((e) => {
         console.log(e);
@@ -48,6 +66,7 @@ function Register() {
       }}
     >
       <div className="container-fluid h-custom">
+      <ToastContainer />
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form onSubmit={handleRegister}>
