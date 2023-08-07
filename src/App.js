@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/Login";
+import Home from "./components/Home";
 import Register from "./components/Register";
 import NavBar from "./components/NavBar";
 import Documents from "./components/Documents";
@@ -62,22 +63,21 @@ function App() {
 
   return (
     <BrowserRouter className="App">
+      
+      <NavBar token={token} handleLogout={handleLogout} />
       <Routes>
-        <Route
-          path="/"
-          element={<NavBar token={token} handleLogout={handleLogout} />}
-        >
-          <Route path="login" element={<Login addToken={addToken} />} />
-          <Route path="register" element={<Register />} />
-          <Route
-            path="documents"
-            element={<Documents token={token} onDelete={deleteDocument} />}
-          />
-          <Route path="autors" element={<Autors />} />
-
-          <Route path="adddocuments" element={<AddDocument token={token} />} />
-          <Route path="addautor" element={<AddAutor token={token} />} />
-        </Route>
+        <Route path="/" element={<Login addToken={addToken} />} />
+        <Route path="/home" element={<Home />} />
+        {token && (
+          <>
+            <Route
+              path="/documents"
+              element={<Documents token={token} onDelete={deleteDocument} />}
+            />
+            <Route path="/autors" element={<Autors />} />
+            <Route path="/adddocuments" element={<AddDocument token={token} />} />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );
