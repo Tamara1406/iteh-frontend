@@ -27,7 +27,7 @@ const Login = ({ addToken }) => {
         if (odg.data.success === true) {
           window.sessionStorage.setItem("auth_token", odg.data.access_token);
           addToken(odg.data.access_token);
-          navigate("/");
+          navigate("/home");
         }
       })
       .catch((e) => {
