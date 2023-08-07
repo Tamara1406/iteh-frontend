@@ -67,6 +67,7 @@ function App() {
       <NavBar token={token} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Login addToken={addToken} />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         {token && (
           <>
