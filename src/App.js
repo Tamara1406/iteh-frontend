@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import Autors from "./components/Autors";
 import AddDocument from "./components/AddDocument";
 import axios from "axios";
+import AddAutor from "./components/addAutor";
 
 function App() {
   // const [token, setToken] = useState(
@@ -75,6 +76,7 @@ function App() {
           <Route path="autors" element={<Autors />} />
 
           <Route path="adddocuments" element={<AddDocument token={token} />} />
+          <Route path="addautor" element={<AddAutor token={token} />} />
         </Route>
       </Routes>
     </BrowserRouter>
