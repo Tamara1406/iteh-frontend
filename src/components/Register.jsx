@@ -5,14 +5,20 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [userData, setUserData] = useState({
-    name: "",
+    username: "",
     email: "",
-    lozinka: "",
+    password: "",
+    firstname: null,
+    lastname: null,
+    role:"standard",
+
   });
+  const [error, setError] = useState(null);
 
   let navigate = useNavigate();
 
   function handleInput(e) {
+    e.preventDefault();
     let newUserData = userData;
     newUserData[e.target.name] = e.target.value;
     setUserData(newUserData);
@@ -21,6 +27,7 @@ function Register() {
 
   function handleRegister(e) {
     e.preventDefault();
+    setError(null);
     axios
       .post("api/register", userData)
       .then((odg) => {
@@ -29,6 +36,7 @@ function Register() {
       })
       .catch((e) => {
         console.log(e);
+        console.log(e.message);
       });
   }
 
@@ -45,11 +53,11 @@ function Register() {
             <form onSubmit={handleRegister}>
               <div className="form-outline mb-4">
                 <input
-                  type="name"
+                  type="username"
                   id="form3Example4"
                   className="form-control form-control-lg"
                   placeholder="Enter a valid username"
-                  name="name"
+                  name="username"
                   onInput={handleInput}
                 />
                 <label className="form-label" htmlFor="form3Example4">
@@ -81,7 +89,7 @@ function Register() {
                   onInput={handleInput}
                 />
                 <label className="form-label" htmlFor="form3Example4">
-                  Lozinka
+                  password
                 </label>
               </div>
 
