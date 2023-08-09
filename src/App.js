@@ -11,6 +11,7 @@ import Autors from "./components/Autors";
 import AddDocument from "./components/AddDocument";
 import axios from "axios";
 import AddAutor from "./components/addAutor";
+import { AuthProvider } from "./components/AuthContext";// Check the file path to AuthContext
 
 function App() {
   // const [token, setToken] = useState(
@@ -62,6 +63,7 @@ function App() {
   }
 
   return (
+    <AuthProvider>
     <BrowserRouter className="App">
       
       <NavBar token={token} handleLogout={handleLogout} />
@@ -73,14 +75,16 @@ function App() {
           <>
             <Route
               path="/documents"
-              element={<Documents token={token} onDelete={deleteDocument} />}
+              element={<Documents onDelete={deleteDocument} />}
             />
             <Route path="/autors" element={<Autors />} />
-            <Route path="/adddocuments" element={<AddDocument token={token} />} />
+            <Route path="/adddocuments" element={<AddDocument />} />
+            <Route path="/addautors" element={<AddAutor />} />
           </>
         )}
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 
