@@ -3,10 +3,13 @@ import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext"; // Import useAuth from AuthContext
+
 
 
 const Login = ({addToken}) => {
         const [userData, setUserData] = useState({email: "", lozinka: ""});
+        const { setUserRole } = useAuth();
 
         let navigate = useNavigate();
 
@@ -19,10 +22,14 @@ const Login = ({addToken}) => {
 
         function handleLogin(e) {
             e.preventDefault();
+            
             axios.post("api/login", userData).then((odg) => {
-                console.log(odg.data);
+                console.log("a"+odg.data);
                 if (odg.data.success === true) {
                     window.sessionStorage.setItem("auth_token", odg.data.access_token);
+                    window.sessionStorage.setItem("user_role", odg.data.role);
+                    //setUserRole(odg.data.role);
+
                     addToken(odg.data.access_token);
                     navigate("/home");
                 }
