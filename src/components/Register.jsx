@@ -11,8 +11,8 @@ function Register() {
         username: "",
         email: "",
         password: "",
-        firstname: null,
-        lastname: null,
+        firstname: "",
+        lastname: "",
         role: "standard"
 
     });
@@ -70,7 +70,23 @@ function Register() {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleRegister}>
                             <div className="form-outline mb-4">
-                                <input type="username" id="form3Example4" className="form-control form-control-lg" placeholder="Enter a valid username" name="username"
+                                <input type="firstname" id="form3Example3" className="form-control form-control-lg" placeholder="Unesite ime" name="firstname"
+                                    onInput={handleInput}/>
+                                <label className="form-label" htmlFor="form3Example3">
+                                    Ime
+                                </label>
+                            </div>
+
+                            <div className="form-outline mb-4">
+                                <input type="lastname" id="form3Example3" className="form-control form-control-lg" placeholder="Unesite prezime" name="lastname"
+                                    onInput={handleInput}/>
+                                <label className="form-label" htmlFor="form3Example3">
+                                    Prezime
+                                </label>
+                            </div>
+
+                            <div className="form-outline mb-4">
+                                <input type="username" id="form3Example4" className="form-control form-control-lg" placeholder="Unesite korisničko ime" name="username"
                                     onInput={handleInput}/>
                                 <label className="form-label" htmlFor="form3Example4">
                                     Korisničko ime
@@ -78,7 +94,7 @@ function Register() {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <input type="email" id="form3Example3" className="form-control form-control-lg" placeholder="Enter a valid email address" name="email"
+                                <input type="email" id="form3Example3" className="form-control form-control-lg" placeholder="Unesite email adresu" name="email"
                                     onInput={handleInput}/>
                                 <label className="form-label" htmlFor="form3Example3">
                                     Email adresa
@@ -86,7 +102,7 @@ function Register() {
                             </div>
 
                             <div className="form-outline mb-3">
-                                <input type="password" id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" name="password"
+                                <input type="password" id="form3Example4" className="form-control form-control-lg" placeholder="Unesite lozinku" name="password"
                                     onInput={handleInput}/>
                                 <label className="form-label" htmlFor="form3Example4">
                                     password
@@ -107,7 +123,7 @@ function Register() {
                                     style={
                                         {zIndex: 999}
                                 }>
-                                    <Link to="/login" className="btn btn-link"
+                                    <Link to="/" className="btn btn-link"
                                         style={
                                             {
                                                 fontSize: "18px",
