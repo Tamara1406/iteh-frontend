@@ -61,6 +61,9 @@ const AddAutor = () => {
       const handleReload = () => {
         window.location.reload();
       };
+      function handleReturn() {
+        navigate("/autors");
+    }
 
   return (
     <div>
@@ -144,7 +147,40 @@ const AddAutor = () => {
                   </button>
                 </div>
               </form>
-              
+              <button onClick={handleReturn}
+                                style={
+                                    {
+                                        backgroundColor: "#191970",
+                                        color: "white",
+                                        borderRadius: "10px",
+                                        fontSize: "15px",
+                                        border: "2px solid black",
+                                        paddingLeft: "2.5rem",
+                                        paddingRight: "2.5rem",
+                                        position: "fixed",
+                                        bottom: "20px",
+                                        left: "20px"
+                                    }
+                            }>
+                                Povratak
+                            </button>
+                            <button onClick={handleReload}
+                                style={
+                                    {
+                                        backgroundColor: "#191970",
+                                        color: "white",
+                                        borderRadius: "10px",
+                                        fontSize: "15px",
+                                        border: "2px solid black",
+                                        paddingLeft: "2.5rem",
+                                        paddingRight: "2.5rem",
+                                        position: "fixed",
+                                        bottom: "20px",
+                                        right: "20px"
+                                    }
+                            }>
+                                Dodaj jos
+                            </button>
              
             </div>
           </div>
