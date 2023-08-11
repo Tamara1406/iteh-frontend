@@ -27,6 +27,10 @@ const AddAutor = () => {
 
       function handleAutor(e) {
         e.preventDefault();
+        if (!autorData.ime || !autorData.struka || !autorData.brojDokumenata) {
+          toast.error("Molimo popunite sva polja za unos!", { autoClose: 3000 });
+          return; // Don't proceed with login
+      }
         setError(null);
         axios
           .post("api/autors", autorData, {
