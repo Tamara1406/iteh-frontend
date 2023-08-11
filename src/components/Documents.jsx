@@ -11,6 +11,7 @@ const Documents = ({onDelete}) => {
     const navigate = useNavigate();
     const [docs, setDocs] = useState();
     const {userRole} = useAuth();
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         if (docs == null) {
@@ -24,47 +25,63 @@ const Documents = ({onDelete}) => {
     });
 
 
-    return (<div>
-        <div style={
-            {
-                marginTop: "30px",
-                marginLeft: "80px"
-            }
-        }> {
-            userRole === "admin" && (<button className="text-50 fw-bold"
-                style={
-                    {
-                        backgroundColor: "#4682B4",
-                        color: "white",
-                        borderRadius: "10px",
-                        fontSize: "15px",
-                        marginLeft: "370px"
-                    }
+    return (
+        <div>
+            <div style={
+                {
+                    marginTop: "30px",
+                    marginLeft: "80px"
                 }
-                onClick={
-                    () => navigate("/adddocuments")
             }>
-                Novi dokument
-            </button>
-            // <a href="adddocuments" className="text-50 fw-bold">
-            // Novi dokument
-            // </a>
-            )
-        }
-            {/* {token == "" ? (
+                {
+                userRole === "admin" && (
+                    <button className="text-50 fw-bold"
+                        style={
+                            {
+                                backgroundColor: "#4682B4",
+                                color: "white",
+                                borderRadius: "10px",
+                                fontSize: "15px",
+                                marginLeft: "370px"
+                            }
+                        }
+                        onClick={
+                            () => navigate("/adddocuments")
+                    }>
+                        Novi dokument
+                    </button>
+                // <a href="adddocuments" className="text-50 fw-bold">
+                // Novi dokument
+                // </a>
+                )
+            }
+                {/* {token == "" ? (
           <></>
         ) : (
           <a href="adddocuments" className="text-50 fw-bold">
             Novi dokument
           </a>
-        )} */} </div>
-        {
-        docs == null ? (<></>) : (docs.map((doc) => (<OneDocument doc={doc}
-            key={
-                doc.id
-            }
-            onDelete={onDelete}/>)))
-    } </div>);
+        )} */}
+                <input type="text" placeholder="Pretrazi dokumente"
+                    value={searchQuery}
+                    onChange={
+                        (e) => setSearchQuery(e.target.value)
+                    }
+                    // Update search query state
+                />
+            </div>
+            {
+            docs == null ? (
+                <></>
+            ) : (docs.filter((doc) => doc.naziv.toLowerCase().includes(searchQuery.toLowerCase()) || doc.autor.ime.toLowerCase().includes(searchQuery.toLowerCase())).map((doc) => (
+                <OneDocument doc={doc}
+                    key={
+                        doc.id
+                    }
+                    onDelete={onDelete}/>
+            )))
+        } </div>
+    );
 };
 
 export default Documents;
