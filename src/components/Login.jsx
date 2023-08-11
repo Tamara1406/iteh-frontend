@@ -4,12 +4,14 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext"; // Import useAuth from AuthContext
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Login = ({addToken}) => {
         const [userData, setUserData] = useState({email: "", lozinka: ""});
         const { setUserRole } = useAuth();
+        const [error, setError] = useState("");
 
         let navigate = useNavigate();
 
@@ -23,6 +25,11 @@ const Login = ({addToken}) => {
         function handleLogin(e) {
             e.preventDefault();
             
+            if (!userData.email || !userData.password) {
+                toast.error("Unesite email i lozinku!", { autoClose: 3000 });
+                return; // Don't proceed with login
+            }
+
             axios.post("api/login", userData).then((odg) => {
                 console.log("a"+odg.data);
                 if (odg.data.success === true) {
@@ -81,6 +88,8 @@ const Login = ({addToken}) => {
                                         </Link>
                                     
                                 </div>
+                                <ToastContainer /> 
+                                
                             </form>
                         </div>
                     </div>
