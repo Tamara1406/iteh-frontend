@@ -153,7 +153,7 @@ const AddDocument = () => {
                                         onChange={handleAutorChange}
                                         // Handle autor dropdown change
                                     >
-                                        <option value="">Izbaeri autora</option>
+                                        <option value="">Izaberi autora</option>
                                         {
                                         autors.map((author) => (
                                             <option key={
