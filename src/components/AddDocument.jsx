@@ -255,7 +255,7 @@ const AddDocument = () => {
                                         left: "20px"
                                     }
                             }>
-                                Return to Documents
+                                Povratak
                             </button>
                             <button onClick={handleReload}
                                 style={
