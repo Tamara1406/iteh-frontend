@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = ({addToken}) => {
         const [userData, setUserData] = useState({email: "", lozinka: ""});
         const { setUserRole } = useAuth();
-        const [error, setError] = useState("");
+        //const [error, setError] = useState("");
 
         let navigate = useNavigate();
 
