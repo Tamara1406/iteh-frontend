@@ -90,6 +90,11 @@ const AddDocument = () => {
 
     function handleDocument(e) {
         e.preventDefault();
+        
+        if (!docData.naziv || !docData.autor_id || !docData.typedocument_id || !docData.sadrzaj) {
+            toast.error("Molimo popunite sva polja za unos.");
+            return;
+        }
         setError(null);
         axios.post("api/documents", docData, {
             headers: {
@@ -278,6 +283,7 @@ const AddDocument = () => {
                 }>
                     {error}</div>
             } </section>
+            <ToastContainer />
         </div>
     );
 };
