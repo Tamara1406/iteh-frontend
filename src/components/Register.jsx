@@ -105,7 +105,7 @@ function Register() {
                                 <input type="password" id="form3Example4" className="form-control form-control-lg" placeholder="Unesite lozinku" name="password"
                                     onInput={handleInput}/>
                                 <label className="form-label" htmlFor="form3Example4">
-                                    password
+                                    Lozinka
                                 </label>
                             </div>
 
