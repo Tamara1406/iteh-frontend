@@ -61,6 +61,36 @@ function App() {
         }
       });
   }
+  function deleteAutor(id) {
+    axios
+      .delete("api/autors/" + id, {
+        headers: {
+          Authorization: `Bearer ${window.sessionStorage.getItem(
+            "auth_token"
+          )}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        const token = window.sessionStorage.getItem("auth_token");
+        window.location.reload();
+        window.sessionStorage.set("auth_token", token);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+      });
+  }
 
   return (
     <AuthProvider>
@@ -77,7 +107,7 @@ function App() {
               path="/documents"
               element={<Documents onDelete={deleteDocument} />}
             />
-            <Route path="/autors" element={<Autors />} />
+            <Route path="/autors" element={<Autors onDelete={deleteAutor} />} />
             <Route path="/adddocuments" element={<AddDocument />} />
             <Route path="/addautors" element={<AddAutor />} />
           </>
