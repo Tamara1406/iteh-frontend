@@ -35,6 +35,7 @@ const OneDocument = ({doc, onDelete}) => {
             }</div>
             {
             userRole === "admin" && (<>
+            
                 <button style={
                         {
                             backgroundColor: "#4682B4",
@@ -43,7 +44,7 @@ const OneDocument = ({doc, onDelete}) => {
                             fontSize: "15px",
                             position: "absolute",
                             bottom: "10px",
-                            right: "10px"
+                            right: "150px"
                         }
                     }
                     className="card-text"

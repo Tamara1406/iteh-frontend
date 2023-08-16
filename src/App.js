@@ -12,6 +12,7 @@ import AddDocument from "./components/AddDocument";
 import axios from "axios";
 import AddAutor from "./components/addAutor";
 import { AuthProvider } from "./components/AuthContext";// Check the file path to AuthContext
+import UpdateDocument from "./components/UpdateDocument";
 
 function App() {
   // const [token, setToken] = useState(
@@ -20,6 +21,7 @@ function App() {
 
   const storedToken = window.sessionStorage.getItem("auth_token");
   const [token, setToken] = useState(storedToken);
+  const [id, setId] = useState(0);
 
   function handleLogout() {
     setToken(null);
@@ -90,6 +92,12 @@ function App() {
           console.log("Error", error.message);
         }
       });
+
+
+      function updateID(id){
+        setId(id);
+    
+    }
   }
 
   return (
@@ -110,6 +118,7 @@ function App() {
             <Route path="/autors" element={<Autors onDelete={deleteAutor} />} />
             <Route path="/adddocuments" element={<AddDocument />} />
             <Route path="/addautors" element={<AddAutor />} />
+            <Route path="/updatedocuments" element = {<UpdateDocument  id={id}/>}/>
           </>
         )}
       </Routes>
