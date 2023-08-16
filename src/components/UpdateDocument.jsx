@@ -13,8 +13,8 @@ const UpdateDocument = ({ id }) => {
     const [docData,setDocData]=useState({
         
         naziv: "",
-        autor_id: "",
-        typedocument_id: "",
+        autor: "",
+        typeDocument: "",
         sadrzaj: "",
         sistemupravljanja_id: 1,
         brojStrana: 20,
@@ -36,7 +36,7 @@ const UpdateDocument = ({ id }) => {
     useEffect(() => {
         const getRandomLists2 = async () => {
           try {
-            const res = await axiosInstance.get( "api/documents/"+id,
+            const res = await axios.get( "api/documents/"+id,
               {
                 headers: {
                   token:
@@ -45,8 +45,10 @@ const UpdateDocument = ({ id }) => {
                 },
               }
             );
-            console.log(res.data.data);
-            setDocData(res.data.data);
+            console.log(res.data);
+            console.log(res.data.autor.ime)
+            console.log(res.data.typeDocument.title)
+            setDocData(res.data);
           } catch (error) {
             if (error.response) {
                 // Request made and server responded
@@ -65,6 +67,8 @@ const UpdateDocument = ({ id }) => {
         getRandomLists2();
       }, [axiosInstance]);
 
+      
+      console.log(docData);
       function updateDocument(e){
         e.preventDefault();   
         axios
@@ -129,7 +133,7 @@ const UpdateDocument = ({ id }) => {
                     id="form3Example3"
                     className="form-control form-control-lg"
                     name="autor_id"
-                    defaultValue={docData.autor_id}
+                    defaultValue={docData.autor.ime}
                     onInput={handleInput}
                   />
                   <label
@@ -147,7 +151,7 @@ const UpdateDocument = ({ id }) => {
                     id="form3Example4"
                     className="form-control form-control-lg"
                     name="typedocument_id"
-                    defaultValue={docData.typedocument_id}
+                    defaultValue={docData.typeDocument.title}
                     onInput={handleInput}
                   />
                   <label

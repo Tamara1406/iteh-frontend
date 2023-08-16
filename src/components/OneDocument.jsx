@@ -4,7 +4,7 @@ import "../css/OneDocument.css";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "./AuthContext";
 
-const OneDocument = ({doc, onDelete}) => {
+const OneDocument = ({doc, onDelete, onUpdate}) => {
     let navigate = useNavigate();
     const {userRole} = useAuth();
 
@@ -49,7 +49,10 @@ const OneDocument = ({doc, onDelete}) => {
                     }
                     className="card-text"
                     onClick={
-                        () => navigate("/updatedocuments")
+                        () => {
+                            onUpdate(doc.id);
+                            navigate("/updatedocuments");
+                        }
                 }>
                     Promeni dokument
                 </button>

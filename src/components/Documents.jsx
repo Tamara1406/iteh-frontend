@@ -7,7 +7,7 @@ import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useAuth} from "./AuthContext";
 
-const Documents = ({onDelete}) => {
+const Documents = ({onDelete, onUpdate}) => {
     const navigate = useNavigate();
     const [docs, setDocs] = useState();
     const {userRole} = useAuth();
@@ -78,7 +78,7 @@ const Documents = ({onDelete}) => {
                     key={
                         doc.id
                     }
-                    onDelete={onDelete}/>
+                    onDelete={onDelete} onUpdate={onUpdate}/>
             )))
         } </div>
     );

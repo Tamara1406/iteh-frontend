@@ -92,13 +92,12 @@ function App() {
           console.log("Error", error.message);
         }
       });
-
-
-      function updateID(id){
-        setId(id);
-    
-    }
   }
+
+  function updateDoc(id){
+    setId(id);
+
+}
 
   return (
     <AuthProvider>
@@ -113,12 +112,12 @@ function App() {
           <>
             <Route
               path="/documents"
-              element={<Documents onDelete={deleteDocument} />}
+              element={<Documents onDelete={deleteDocument} onUpdate={updateDoc}/>}
             />
             <Route path="/autors" element={<Autors onDelete={deleteAutor} />} />
             <Route path="/adddocuments" element={<AddDocument />} />
             <Route path="/addautors" element={<AddAutor />} />
-            <Route path="/updatedocuments" element = {<UpdateDocument  id={id}/>}/>
+            <Route path="/updatedocuments" element = {<UpdateDocument  id={id} />}/>
           </>
         )}
       </Routes>
