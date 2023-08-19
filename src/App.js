@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import Maps from "./components/Maps";
 import Register from "./components/Register";
 import NavBar from "./components/NavBar";
 import Documents from "./components/Documents";
@@ -118,6 +119,7 @@ function App() {
             <Route path="/adddocuments" element={<AddDocument />} />
             <Route path="/addautors" element={<AddAutor />} />
             <Route path="/updatedocuments" element = {<UpdateDocument  id={id} />}/>
+            <Route path="/maps" element = {<Maps/>}/>
           </>
         )}
       </Routes>

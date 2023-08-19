@@ -80,7 +80,10 @@ const Documents = ({onDelete, onUpdate}) => {
                     }
                     onDelete={onDelete} onUpdate={onUpdate}/>
             )))
-        } </div>
+        } 
+        
+        </div>
+        
     );
 };
 

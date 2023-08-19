@@ -43,3 +43,25 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.prvi, .drugi {
+  display: inline-block;
+}
+
+.drugi {
+  margin: 100px;
+}
+
+.prvi {
+  width: 400px;
+  margin-top: 50px;
+  margin-left: 100px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+.text {
+  margin: 50px;
+}
+
