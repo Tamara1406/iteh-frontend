@@ -8,27 +8,79 @@ const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
   });
 
+  const useAutors = () => {
+    const [autors, setAutors] = useState([]);
+
+    useEffect(() => {
+        if (autors.length === 0) { // Check if autors array is empty
+            axios.get("api/autors").then((odg) => {
+                const extractedAutors = odg.data.autors; // Extract the array
+                setAutors(extractedAutors);
+            });
+        }
+    }, [autors]);
+    // console.log(autors);
+    return autors;
+};
+
+
+const useTypeDoc = () => {
+    const [types, setTypes] = useState([]);
+
+    useEffect(() => {
+        if (types.length === 0) { // Check if autors array is empty
+            axios.get("api/typedocuments").then((odg) => {
+                const extractedTypes = odg.data.typedocuments; // Extract the array
+                setTypes(extractedTypes);
+            });
+        }
+    }, [types]);
+    // console.log(autors);
+    return types;
+};
+
 const UpdateDocument = ({ id }) => {
 
     const [docData,setDocData]=useState({
         
         naziv: "",
-        autor: "",
-        typeDocument: "",
+        autor_id: "",
+        typedocument_id: "",
         sadrzaj: "",
         sistemupravljanja_id: 1,
         brojStrana: 20,
         id: id,
     });
+    const [error, setError] = useState(null);
+    const autors = useAutors();
+    const types = useTypeDoc();
+    console.log(id); 
 
-    console.log(id);
+    const handleAutorChange = (event) => {
+      const selectedAutorId = event.target.value;
+      setDocData((prevDocData) => ({
+          ...prevDocData,
+          autor_id: selectedAutorId // Update the selected author ID in docData
+      }));
+  };
+
+  const handleTypeDocChange = (event) => {
+      const selectedTypeId = event.target.value;
+      setDocData((prevDocData) => ({
+          ...prevDocData,
+          typedocument_id: selectedTypeId // Update the selected author ID in docData
+      }));
+  };
+
 
     function handleInput(e){  
+      e.preventDefault();
         let newDocData = docData;  
         
         newDocData[e.target.name]=e.target.value;
         
         setDocData(newDocData);
+        console.log(docData);
        
     }
     let navigate = useNavigate();
@@ -45,9 +97,6 @@ const UpdateDocument = ({ id }) => {
                 },
               }
             );
-            console.log(res.data);
-            console.log(res.data.autor.ime)
-            console.log(res.data.typeDocument.title)
             setDocData(res.data);
           } catch (error) {
             if (error.response) {
@@ -68,7 +117,6 @@ const UpdateDocument = ({ id }) => {
       }, [axiosInstance]);
 
       
-      console.log(docData);
       function updateDocument(e){
         e.preventDefault();   
         axios
@@ -108,7 +156,7 @@ const UpdateDocument = ({ id }) => {
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form onSubmit={() => updateDocument(id)} style={{ marginTop: "50px" }}>
+              <form onSubmit={updateDocument} style={{ marginTop: "50px" }}>
                 <div className="form-outline mb-4">
                   <input
                     type="naziv"
@@ -128,14 +176,27 @@ const UpdateDocument = ({ id }) => {
                 </div>
 
                 <div className="form-outline mb-4">
-                  <input
-                    type="autor_id"
-                    id="form3Example3"
-                    className="form-control form-control-lg"
-                    name="autor_id"
-                    defaultValue={docData.autor.ime}
-                    onInput={handleInput}
-                  />
+                <select className="form-control form-control-lg" name="autor_id"
+                                        defaultValue={
+                                            docData.autor_id
+                                        }
+                                        onChange={handleAutorChange}
+                                        // Handle autor dropdown change
+                                    >
+                                        {/* <option value="">{docData.autor.ime}</option> */}
+                                        {
+                                        autors.map((author) => (
+                                            <option key={
+                                                    author.id
+                                                }
+                                                value={
+                                                    author.id
+                                            }>
+                                                {
+                                                author.ime
+                                            } </option>
+                                        ))
+                                    } </select>
                   <label
                     className="form-label"
                     style={{ color: "whitesmoke" }}
@@ -146,14 +207,27 @@ const UpdateDocument = ({ id }) => {
                 </div>
 
                 <div className="form-outline mb-3">
-                  <input
-                    type="typedocument_id"
-                    id="form3Example4"
-                    className="form-control form-control-lg"
-                    name="typedocument_id"
-                    defaultValue={docData.typeDocument.title}
-                    onInput={handleInput}
-                  />
+                <select className="form-control form-control-lg" name="typedocument_id"
+                                        defaultValue={
+                                            docData.typedocument_id
+                                        }
+                                        onChange={handleTypeDocChange}
+                                        // Handle autor dropdown change
+                                    >
+                                        {/* <option value="">{docData.typeDocument.title}</option> */}
+                                        {
+                                        types.map((type) => (
+                                            <option key={
+                                                    type.id
+                                                }
+                                                value={
+                                                    type.id
+                                            }>
+                                                {
+                                                type.naziv
+                                            } </option>
+                                        ))
+                                    } </select>
                   <label
                     className="form-label"
                     style={{ color: "whitesmoke" }}
