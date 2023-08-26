@@ -55,10 +55,14 @@ const NavBar = ({token, handleLogout}) => {
                             <a className="nav-link" href="/autors">
                                 Autori
                             </a>
+                            <a className="nav-link" href="/maps">
+                                Kontakt
+                            </a>
                             <a className="nav-link" href="/"
                                 onClick={handleLogoutClick}>
                                 Logout
                             </a>
+                            
                             </>
                         // )
                         // : (
