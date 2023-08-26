@@ -1,19 +1,23 @@
 import React from "react";
-import {useAuth} from "./AuthContext"; // Adjust the import path
+import { useAuth } from "./AuthContext"; 
+import "../css/Home.css"; 
 
 function Home() {
-    const {userRole} = useAuth(); // Access the userRole value from the context
+    const { userRole } = useAuth();
 
     console.log("User Role in Home:", userRole);
 
-
-    return (<section>
-        <div className="welcome-text">
-           Hello, Welcome to Document Management System
-        </div>
-        <br />
-        <div>User role: {userRole}</div>
-    </section>);
+    return (
+        <section className="home-container">
+            <div className="content-box">
+                <div className="welcome-text">
+                    Dobrodošli na sajt za upravljanje dokumentima (DMS)
+                </div>
+                <br/>
+                <div className="welcome-text2">Korisnički status {userRole} Vam omogućava pristup raznim funkcionalnostima koje će Vam omogućiti efikasan rad sa velikom količinom dokumenata!</div>
+            </div>
+        </section>
+    );
 }
 
 export default Home;
