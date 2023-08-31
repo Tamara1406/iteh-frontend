@@ -26,9 +26,9 @@ const useTypeDoc = () => {
     const [types, setTypes] = useState([]);
 
     useEffect(() => {
-        if (types.length === 0) { // Check if autors array is empty
+        if (types.length === 0) { 
             axios.get("api/typedocuments").then((odg) => {
-                const extractedTypes = odg.data.typedocuments; // Extract the array
+                const extractedTypes = odg.data.typedocuments; 
                 setTypes(extractedTypes);
             });
         }

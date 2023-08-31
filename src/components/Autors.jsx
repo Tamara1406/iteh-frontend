@@ -22,9 +22,9 @@ const Autors = ({onDelete}) => {
     const navigate = useNavigate({onDelete});
 
     const sortAutors = () => {
-        const sortedAutors = [...autors]; // Create a copy of the autors array
-        sortedAutors.sort((a, b) => b.brojDokumenata - a.brojDokumenata); // Sort the array based on brojDokumenata in descending order
-        setAutors(sortedAutors); // Update the autors state with the sorted array
+        const sortedAutors = [...autors]; 
+        sortedAutors.sort((a, b) => b.brojDokumenata - a.brojDokumenata); 
+        setAutors(sortedAutors); 
     };
 
     return (
