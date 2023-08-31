@@ -7,7 +7,7 @@ import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useAuth} from "./AuthContext";
 
-const Documents = ({onDelete, onUpdate}) => {
+const Documents = ({onDelete}) => {
     const navigate = useNavigate();
     const [docs, setDocs] = useState();
     const {userRole} = useAuth();
@@ -29,8 +29,10 @@ const Documents = ({onDelete, onUpdate}) => {
         <div>
             <div style={
                 {
+                    display: "flex",
+                    alignItems: "center",
                     marginTop: "30px",
-                    marginLeft: "80px"
+                    marginLeft: "240px"
                 }
             }>
                 {
@@ -42,7 +44,7 @@ const Documents = ({onDelete, onUpdate}) => {
                                 color: "white",
                                 borderRadius: "10px",
                                 fontSize: "15px",
-                                marginLeft: "370px"
+                                marginLeft: "0"
                             }
                         }
                         onClick={
@@ -67,6 +69,7 @@ const Documents = ({onDelete, onUpdate}) => {
                     onChange={
                         (e) => setSearchQuery(e.target.value)
                     }
+                    style={{ marginLeft: "20px" }}
                     // Update search query state
                 />
             </div>
@@ -78,12 +81,10 @@ const Documents = ({onDelete, onUpdate}) => {
                     key={
                         doc.id
                     }
-                    onDelete={onDelete} onUpdate={onUpdate}/>
+                    onDelete={onDelete}/>
             )))
-        } 
-        
-        </div>
-        
+        } </div>
+
     );
 };
 

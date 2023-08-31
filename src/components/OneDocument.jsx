@@ -4,9 +4,15 @@ import "../css/OneDocument.css";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "./AuthContext";
 
-const OneDocument = ({doc, onDelete, onUpdate}) => {
+const OneDocument = ({doc, onDelete}) => {
     let navigate = useNavigate();
     const {userRole} = useAuth();
+
+    const handleUpdateClick = () => {
+        navigate("/updatedocuments", { state: { doc: doc } });
+    };
+
+
 
     return (<div className="card"
         style={
@@ -48,12 +54,14 @@ const OneDocument = ({doc, onDelete, onUpdate}) => {
                         }
                     }
                     className="card-text"
-                    onClick={
-                        () => {
-                            onUpdate(doc.id);
-                            navigate("/updatedocuments");
-                        }
-                }>
+                    // onClick={
+                    //     () => {
+                    //         //onUpdate(doc.id);
+                    //         navigate("/updatedocuments");
+                    //     }
+                    onClick={handleUpdateClick}
+                //}
+                >
                     Promeni dokument
                 </button>
                 <button style={

@@ -4,9 +4,9 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
-  });
+import {useLocation} from "react-router-dom";
+
+const axiosInstance = axios.create({baseURL: process.env.REACT_APP_API_URL});
 
 
 const useAutors = () => {
@@ -40,56 +40,42 @@ const useTypeDoc = () => {
     return types;
 };
 
-const UpdateDocument = ({id}) => {
+const UpdateDocument = () => {
+    const location = useLocation();
+    const {doc} = location.state;
+
+
     const [docData, setDocData] = useState({
-        id: id,
-        naziv: "",
-        autor_id: "",
-        typedocument_id: "",
-        sadrzaj: "",
-        sistemupravljanja_id: 1,
-        brojStrana: 20
+        id: doc.id,
+        naziv: doc.naziv,
+        autor_id: doc.autor.id,
+        typedocument_id: doc.typeDocument.id,
+        sadrzaj: doc.sadrzaj,
+        sistemupravljanja_id: doc.sistemUpravljanja.id,
+        brojStrana: doc.brojStrana
     });
+
+    const [original, setOriginal] = useState({
+        id: doc.id,
+        naziv: doc.naziv,
+        autor_id: doc.autor.id,
+        typedocument_id: doc.typeDocument.id,
+        sadrzaj: doc.sadrzaj,
+        sistemupravljanja_id: doc.sistemUpravljanja.id,
+        brojStrana: doc.brojStrana
+    });
+
+
+    console.log(docData);
+
     const [error, setError] = useState(null);
-    // console.log(autorData[0]);
+
     const autors = useAutors();
     const types = useTypeDoc();
-    console.log(types);
+    // console.log(types);
+    // console.log(docData);
 
     let navigate = useNavigate();
-
-    useEffect(() => {
-              const getRandomLists2 = async () => {
-                try {
-                  const res = await axios.get( "api/documents/"+id,
-                    {
-                      headers: {
-                        token:
-                          "Bearer " +
-                          ( window.sessionStorage.getItem("auth_token")),
-                      },
-                    }
-                  );
-                  setDocData(res.data);
-                  console.log(res.data);
-                } catch (error) {
-                  if (error.response) {
-                      // Request made and server responded
-                      console.log(error.response.data);
-                      console.log(error.response.status);
-                      console.log(error.response.headers);
-                  } else if (error.request) {
-                      // The request was made but no response was received
-                      console.log(error.request);
-                  } else {
-                      // Something happened in setting up the request that triggered an Error
-                      console.log('Error', error.message);
-                  }
-                }
-              };
-              getRandomLists2();
-            }, [axiosInstance]);
-      
 
     function handleReturn() {
         navigate("/documents");
@@ -98,23 +84,26 @@ const UpdateDocument = ({id}) => {
     // Handle dropdown change event
     const handleAutorChange = (event) => {
         const selectedAutorId = event.target.value;
+
         setDocData((prevDocData) => ({
             ...prevDocData,
-            autor_id: selectedAutorId // Update the selected author ID in docData
+            autor_id: selectedAutorId
         }));
+
+        console.log(docData.autor_id);
     };
 
     const handleTypeDocChange = (event) => {
         const selectedTypeId = event.target.value;
         setDocData((prevDocData) => ({
             ...prevDocData,
-            typedocument_id: selectedTypeId // Update the selected author ID in docData
+            typedocument_id: selectedTypeId
         }));
     };
 
     function handleInput(e) {
         e.preventDefault();
-        console.log(docData)
+        // console.log(docData)
         let newDocData = docData;
         newDocData[e.target.name] = e.target.value;
         setDocData(newDocData);
@@ -125,15 +114,22 @@ const UpdateDocument = ({id}) => {
         window.location.reload();
     };
 
+    const isDataChanged = JSON.stringify(docData) !== JSON.stringify(original);
+
     function handleDocument(e) {
         e.preventDefault();
-        console.log(docData);
+        // console.log(docData);
+
+        if (! isDataChanged) {
+            toast.error("Nema napravljenih promena.");
+            return;
+        }
         if (!docData.naziv || !docData.autor_id || !docData.typedocument_id || !docData.sadrzaj) {
             toast.error("Molimo popunite sva polja za unos!");
             return;
         }
         setError(null);
-        axios.put("api/documents" + id, docData, {
+        axios.put("api/documents/" + docData.id, docData, {
             headers: {
                 Authorization: `Bearer ${
                     window.sessionStorage.getItem("auth_token")
@@ -143,7 +139,7 @@ const UpdateDocument = ({id}) => {
             console.log("odg " + odg.status);
             if (odg.status === 200) {
                 toast.success("Sacuvano!");
-                // Display success notification
+
                 // navigate("/documents");
             } else {
                 toast.error("Greška: Neispravno uneti podaci.");
@@ -175,7 +171,9 @@ const UpdateDocument = ({id}) => {
                             }>
                                 <div className="form-outline mb-4">
                                     <input type="naziv" id="form3Example4" className="form-control form-control-lg" name="naziv"
-                                    defaultValue={docData.naziv}
+                                        defaultValue={
+                                            docData.naziv
+                                        }
                                         onInput={handleInput}/>
                                     <label className="form-label"
                                         style={
@@ -193,9 +191,7 @@ const UpdateDocument = ({id}) => {
                                         value={
                                             docData.autor_id
                                         }
-                                        onChange={handleAutorChange}
-                                        // Handle autor dropdown change
-                                    >
+                                        onChange={handleAutorChange}>
                                         {
                                         autors.map((author) => (
                                             <option key={
@@ -218,13 +214,10 @@ const UpdateDocument = ({id}) => {
                                 </div>
 
                                 <div className="form-outline mb-3">
-                                <select className="form-control form-control-lg" name="typedocument_id"
+                                    <select className="form-control form-control-lg" name="typedocument_id"
                                         value={
                                             docData.typedocument_id
-                                        }
-                                        onChange={handleTypeDocChange}
-                                        // Handle autor dropdown change
-                                    >
+                                    }>
                                         {
                                         types.map((type) => (
                                             <option key={
@@ -248,7 +241,9 @@ const UpdateDocument = ({id}) => {
 
                                 <div className="form-outline mb-4">
                                     <input type="sadrzaj" id="form3Example3" className="form-control form-control-lg" name="sadrzaj"
-                                        defaultValue={docData.sadrzaj}
+                                        defaultValue={
+                                            docData.sadrzaj
+                                        }
                                         onInput={handleInput}/>
                                     <label className="form-label"
                                         style={
@@ -256,7 +251,7 @@ const UpdateDocument = ({id}) => {
                                         }
                                         htmlFor="form3Example3">
                                         <b>
-                                        Sadrzaj</b>
+                                            Sadrzaj</b>
                                     </label>
                                 </div>
 
@@ -320,13 +315,9 @@ const UpdateDocument = ({id}) => {
                 }>
                     {error}</div>
             } </section>
-            <ToastContainer />
+            <ToastContainer/>
         </div>
     );
 };
 
 export default UpdateDocument;
-
-
-
-
