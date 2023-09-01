@@ -27,7 +27,7 @@ const Login = ({addToken}) => {
             
             if (!userData.email || !userData.password) {
                 toast.error("Unesite email i lozinku!", { autoClose: 3000 });
-                return; // Don't proceed with login
+                return; 
             }
 
             axios.post("api/login", userData).then((odg) => {

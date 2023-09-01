@@ -29,7 +29,7 @@ const AddAutor = () => {
         e.preventDefault();
         if (!autorData.ime || !autorData.struka || !autorData.brojDokumenata) {
           toast.error("Molimo popunite sva polja za unos!", { autoClose: 3000 });
-          return; // Don't proceed with login
+          return; 
       }
         setError(null);
         axios
@@ -43,7 +43,7 @@ const AddAutor = () => {
           .then((odg) => {
             console.log("odg " + odg.status);
             if (odg.status === 200) {
-              toast.success("Dodato!"); // Display success notification
+              toast.success("Dodato!"); 
               //navigate("/documents");
             } else {
               toast.error("Greška: Neispravno uneti podaci.");

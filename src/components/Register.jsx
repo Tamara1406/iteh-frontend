@@ -38,7 +38,7 @@ function Register() {
 
             if (userData.email && userData.username && userData.password) {
                 toast.success("Dodato!");
-                // Display success notification
+                
                 // navigate("/documents");
                 setTimeout(() => {
                     navigate("/");

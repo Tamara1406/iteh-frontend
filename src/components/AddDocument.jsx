@@ -10,9 +10,9 @@ const useAutors = () => {
     const [autors, setAutors] = useState([]);
 
     useEffect(() => {
-        if (autors.length === 0) { // Check if autors array is empty
+        if (autors.length === 0) { 
             axios.get("api/autors").then((odg) => {
-                const extractedAutors = odg.data.autors; // Extract the array
+                const extractedAutors = odg.data.autors; 
                 setAutors(extractedAutors);
             });
         }
@@ -59,12 +59,12 @@ const AddDocument = () => {
         navigate("/documents");
     }
 
-    // Handle dropdown change event
+  
     const handleAutorChange = (event) => {
         const selectedAutorId = event.target.value;
         setDocData((prevDocData) => ({
             ...prevDocData,
-            autor_id: selectedAutorId // Update the selected author ID in docData
+            autor_id: selectedAutorId 
         }));
     };
 
@@ -72,7 +72,7 @@ const AddDocument = () => {
         const selectedTypeId = event.target.value;
         setDocData((prevDocData) => ({
             ...prevDocData,
-            typedocument_id: selectedTypeId // Update the selected author ID in docData
+            typedocument_id: selectedTypeId 
         }));
     };
 
@@ -106,7 +106,7 @@ const AddDocument = () => {
             console.log("odg " + odg.status);
             if (odg.status === 200) {
                 toast.success("Dodato!");
-                // Display success notification
+                
                 // navigate("/documents");
             } else {
                 toast.error("Greška: Neispravno uneti podaci.");
@@ -156,7 +156,7 @@ const AddDocument = () => {
                                             docData.autor_id
                                         }
                                         onChange={handleAutorChange}
-                                        // Handle autor dropdown change
+                                        
                                     >
                                         <option value="">Izaberi autora</option>
                                         {
@@ -186,7 +186,7 @@ const AddDocument = () => {
                                             docData.typedocument_id
                                         }
                                         onChange={handleTypeDocChange}
-                                        // Handle autor dropdown change
+                                        
                                     >
                                         <option value="">Izaberi tip dokumenta</option>
                                         {

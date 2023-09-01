@@ -11,7 +11,7 @@ export function AuthProvider({children}) {
     const [token, setToken] = useState(storedToken);
     const [userRole, setUserRole] = useState(storedUserRole);
 
-    useEffect(() => { // Update the userRole whenever storedUserRole changes
+    useEffect(() => { 
         setUserRole(storedUserRole);
     }, [storedUserRole]);
 

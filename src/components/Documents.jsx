@@ -70,7 +70,7 @@ const Documents = ({onDelete}) => {
                         (e) => setSearchQuery(e.target.value)
                     }
                     style={{ marginLeft: "20px" }}
-                    // Update search query state
+                    
                 />
             </div>
             {

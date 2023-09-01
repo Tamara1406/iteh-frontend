@@ -55,7 +55,7 @@ const Autors = ({onDelete}) => {
                     (e) => setSearchQuery(e.target.value)
                     
                 }
-                style={{ marginLeft: "20px" }}
+                style={{ marginLeft: "70px" }}
                 />
 
             <button onClick={sortAutors}
@@ -65,7 +65,7 @@ const Autors = ({onDelete}) => {
                         color: "white",
                         borderRadius: "10px",
                         fontSize: "15px",
-                        marginLeft: "30px", // Align button to the left
+                        marginLeft: "70px", 
                         marginTop: "100px",
                         fontWeight: "semi-bold"
                     }

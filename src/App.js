@@ -12,7 +12,7 @@ import Autors from "./components/Autors";
 import AddDocument from "./components/AddDocument";
 import axios from "axios";
 import AddAutor from "./components/addAutor";
-import { AuthProvider } from "./components/AuthContext";// Check the file path to AuthContext
+import { AuthProvider } from "./components/AuthContext";
 import UpdateDocument from "./components/UpdateDocument";
 
 function App() {
@@ -51,15 +51,15 @@ function App() {
       })
       .catch(function (error) {
         if (error.response) {
-          // Request made and server responded
+         
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
         } else if (error.request) {
-          // The request was made but no response was received
+        
           console.log(error.request);
         } else {
-          // Something happened in setting up the request that triggered an Error
+        
           console.log("Error", error.message);
         }
       });
@@ -81,15 +81,15 @@ function App() {
       })
       .catch(function (error) {
         if (error.response) {
-          // Request made and server responded
+          
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
         } else if (error.request) {
-          // The request was made but no response was received
+        
           console.log(error.request);
         } else {
-          // Something happened in setting up the request that triggered an Error
+         
           console.log("Error", error.message);
         }
       });
