@@ -37,7 +37,7 @@ const Autors = ({onDelete}) => {
                             color: "white",
                             borderRadius: "10px",
                             fontSize: "15px",
-                            marginLeft: "700px",
+                            marginLeft: "70px",
                             marginTop: "0px"
                         }
                     }
