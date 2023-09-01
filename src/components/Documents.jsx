@@ -12,6 +12,7 @@ const Documents = ({onDelete}) => {
     const [docs, setDocs] = useState();
     const {userRole} = useAuth();
     const [searchQuery, setSearchQuery] = useState("");
+    const [typeSearchQuery, setTypeSearchQuery] = useState("");
 
     useEffect(() => {
         if (docs == null) {
@@ -69,14 +70,23 @@ const Documents = ({onDelete}) => {
                     onChange={
                         (e) => setSearchQuery(e.target.value)
                     }
-                    style={{ marginLeft: "20px" }}
-                    
-                />
+                    style={
+                        {marginLeft: "20px"}
+                    }/>
+                <input type="text" placeholder="Pretrazi po temi"
+                    value={typeSearchQuery}
+                    onChange={
+                        (e) => setTypeSearchQuery(e.target.value)
+                    }
+                    style={
+                        {marginLeft: "20px"}
+                    }/>
             </div>
             {
             docs == null ? (
                 <></>
-            ) : (docs.filter((doc) => doc.naziv.toLowerCase().includes(searchQuery.toLowerCase())).map((doc) => (
+            ) : (docs.filter((doc) => doc.naziv.toLowerCase().includes(searchQuery.toLowerCase()) && doc.typeDocument.title.toLowerCase().includes(typeSearchQuery.toLowerCase()) // Filter by document type
+            ).map((doc) => (
                 <OneDocument doc={doc}
                     key={
                         doc.id
