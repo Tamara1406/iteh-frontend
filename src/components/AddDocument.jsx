@@ -223,6 +223,19 @@ const AddDocument = () => {
                                     </label>
                                 </div>
 
+                                <div className="form-outline mb-4">
+                                    <input type="brojStrana" id="form3Example3" className="form-control form-control-lg" name="brojStrana"
+                                        onInput={handleInput}/>
+                                    <label className="form-label"
+                                        style={
+                                            {color: "whitesmoke"}
+                                        }
+                                        htmlFor="form3Example3">
+                                        <b>
+                                            Broj strana</b>
+                                    </label>
+                                </div>
+
                                 <div className="text-center text-lg-start mt-4 pt-2">
                                     <button type="submit" className="btn btn-primary btn-lg"
                                         style={
