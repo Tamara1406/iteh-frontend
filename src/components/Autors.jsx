@@ -22,9 +22,9 @@ const Autors = ({onDelete}) => {
     const navigate = useNavigate({onDelete});
 
     const sortAutors = () => {
-        const sortedAutors = [...autors]; 
-        sortedAutors.sort((a, b) => b.brojDokumenata - a.brojDokumenata); 
-        setAutors(sortedAutors); 
+        const sortedAutors = [...autors];
+        sortedAutors.sort((a, b) => b.brojDokumenata - a.brojDokumenata);
+        setAutors(sortedAutors);
     };
 
     return (
@@ -37,7 +37,8 @@ const Autors = ({onDelete}) => {
                             color: "white",
                             borderRadius: "10px",
                             fontSize: "15px",
-                            marginLeft: "370px"
+                            marginLeft: "700px",
+                            marginTop: "0px"
                         }
                     }
                     onClick={
@@ -52,9 +53,10 @@ const Autors = ({onDelete}) => {
                 value={searchQuery}
                 onChange={
                     (e) => setSearchQuery(e.target.value)
+                    
                 }
-                
-            />
+                style={{ marginLeft: "20px" }}
+                />
 
             <button onClick={sortAutors}
                 style={
@@ -63,23 +65,24 @@ const Autors = ({onDelete}) => {
                         color: "white",
                         borderRadius: "10px",
                         fontSize: "15px",
-                        marginLeft: "1300px",
-                        marginTop: "100px"
+                        marginLeft: "30px", // Align button to the left
+                        marginTop: "100px",
+                        fontWeight: "semi-bold"
                     }
             }>
-                Sort by brojDokumenata
+                Sortiraj po broju dokumenata
             </button>
             {
             autors == null ? (
                 <></>
-            ) : ( autors
-                .filter((autor) =>
-                    autor.ime.toLowerCase().includes(searchQuery.toLowerCase())
-                )
-                .map((autor) => (
-                    <OneAutor autor={autor} key={autor.id} onDelete={onDelete} />
-                ))
-        )} </div>
+            ) : (autors.filter((autor) => autor.ime.toLowerCase().includes(searchQuery.toLowerCase())).map((autor) => (
+                <OneAutor autor={autor}
+                    key={
+                        autor.id
+                    }
+                    onDelete={onDelete}/>
+            )))
+        } </div>
     );
 };
 
