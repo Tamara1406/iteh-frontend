@@ -76,7 +76,7 @@ const Documents = ({onDelete}) => {
             {
             docs == null ? (
                 <></>
-            ) : (docs.filter((doc) => doc.naziv.toLowerCase().includes(searchQuery.toLowerCase()) || doc.autor.ime.toLowerCase().includes(searchQuery.toLowerCase())).map((doc) => (
+            ) : (docs.filter((doc) => doc.naziv.toLowerCase().includes(searchQuery.toLowerCase())).map((doc) => (
                 <OneDocument doc={doc}
                     key={
                         doc.id
